@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Blocks.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Assignment3</a> &gt; <a href="index.source.html" class="el_package">piano</a> &gt; <span class="el_source">Blocks.java</span></div><h1>Blocks.java</h1><pre class="source lang-java linenums">package piano;
+
+import processing.core.PApplet;
+
+public class Blocks {
+
+    private Block[][] blocks;
+
+    /**
+     * Constructor for Blocks
+     */
+<span class="fc" id="L12">    public Blocks() {</span>
+<span class="fc" id="L13">        this.blocks = new Block[13][32];</span>
+<span class="fc" id="L14">    }</span>
+
+    /**
+     * Gets the current array of Block objects
+     * @return the Block[][] array
+     */
+    public Block[][] getBlocks() {
+<span class="fc" id="L21">        return this.blocks;</span>
+    }
+
+    /**
+     * Clicks on a specific block
+     * @param x x coordinate in Block[][] array
+     * @param y y coordinate in Block[][] array
+     * @param handler current instance of MidiHandler
+     */
+    public void setBlock(int x, int y, MidiHandler handler) {
+<span class="fc" id="L31">        this.blocks[y][x].click(handler);</span>
+<span class="fc" id="L32">    }</span>
+
+    /**
+     * Populates the blocks array with deactivated Block objects
+     * @param app current instance of App
+     */
+    public void populateBlocks(PApplet app) {
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        for (int i = 0; i &lt; this.blocks.length; i++) {</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">            for (int j = 0; j &lt; this.blocks[0].length; j++) {</span>
+<span class="fc" id="L41">                int y =  20*i+75;</span>
+<span class="fc" id="L42">                int x = 15*j+60;</span>
+<span class="fc" id="L43">                this.blocks[i][j] = new Block(app, x, y, j, i);</span>
+            }
+        }
+<span class="fc" id="L46">    }</span>
+
+    /**
+     * Draws all blocks currently held by Blocks object
+     * @param app current instance of App
+     */
+    public void drawBlocks(PApplet app) {
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (int i = 0; i &lt; this.blocks.length; i++ ){</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">            for (int j = 0; j &lt; this.blocks[0].length; j++) {</span>
+<span class="fc" id="L55">                this.blocks[i][j].drawBlock(app);</span>
+            }
+        }
+<span class="fc" id="L58">    }</span>
+
+    /**
+     * Deactivates all Block objects
+     * @param handler current instance of MidiHandler
+     */
+    public void removeAll(MidiHandler handler) {
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        for (int i = 0; i &lt; this.blocks.length; i++) {</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            for (int j = 0; j &lt; this.blocks[0].length; j++) {</span>
+<span class="fc" id="L67">                this.blocks[i][j].deactivate(handler);</span>
+            }
+        }
+<span class="fc" id="L70">    }</span>
+
+    /**
+     * Reads in an array of current state of every block
+     * false for inactive, true for active
+     * Resets the Blocks state to the one dictated by 
+     * the notes parameter
+     * @param notes an array of boolean objects
+     * @param handler current instance of MidiHandler
+     */
+    public void saveDataToBlockArray(boolean[][] notes, MidiHandler handler) {
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if (notes != null) {</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">            for (int i = 0; i &lt; this.blocks.length; i++ ){</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">                for (int j = 0; j &lt; this.blocks[0].length; j++) {</span>
+<span class="pc bpc" id="L84" title="1 of 4 branches missed.">                    if (notes[i][j] == true &amp;&amp; this.blocks[i][j].isActive() == false) {</span>
+<span class="nc" id="L85">                        this.blocks[i][j].click(handler);</span>
+<span class="fc bfc" id="L86" title="All 4 branches covered.">                    } else if (notes[i][j] == false &amp;&amp; this.blocks[i][j].isActive() == true) {</span>
+<span class="fc" id="L87">                        this.blocks[i][j].deactivate(handler);</span>
+                    }
+                }
+            }
+        }
+<span class="fc" id="L92">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

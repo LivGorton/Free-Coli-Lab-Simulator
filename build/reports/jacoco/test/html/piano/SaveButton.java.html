@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SaveButton.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Assignment3</a> &gt; <a href="index.source.html" class="el_package">piano</a> &gt; <span class="el_source">SaveButton.java</span></div><h1>SaveButton.java</h1><pre class="source lang-java linenums">package piano;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+import java.io.*;
+
+public class SaveButton extends Button {
+
+    /**
+     * Constructor for SaveButton
+     * @param images ImagesBuilder object
+     */
+    public SaveButton(ImagesBuilder images) {
+<span class="fc" id="L14">        super(images, 140, 5);</span>
+<span class="fc" id="L15">    }</span>
+
+    /**
+     * Saves the current set of Block states and the current instrument to a txt file
+     * @param handler the current instance of MidiHandler
+     * @param blocks the current instance of Blocks
+     */
+    public void save(MidiHandler handler, Blocks blocks) {
+        try {
+<span class="fc" id="L24">            File file = new File(&quot;save.txt&quot;);</span>
+<span class="fc" id="L25">            FileWriter fw = new FileWriter(file, false);</span>
+<span class="fc" id="L26">            fw.write(Integer.toString(handler.getInstrument()) + '\n');</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">            for (int i = 0; i &lt; blocks.getBlocks().length; i++) {</span>
+<span class="fc" id="L28">                String currentValues = &quot;&quot;;</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">                for (int j = 0; j &lt; blocks.getBlocks()[0].length; j++) {</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">                    if (blocks.getBlocks()[i][j].isActive()) {</span>
+<span class="fc" id="L31">                        currentValues += '1';</span>
+                    } else {
+<span class="fc" id="L33">                        currentValues += '0';</span>
+                    }
+                }
+<span class="fc" id="L36">                fw.write(currentValues + '\n');</span>
+            }
+<span class="fc" id="L38">            fw.close();</span>
+<span class="nc" id="L39">        } catch(Exception e) {</span>
+<span class="nc" id="L40">            System.err.println(e);</span>
+<span class="fc" id="L41">        }</span>
+<span class="fc" id="L42">    }</span>
+
+    public void onClick(MidiHandler handler, Blocks blocks) {
+<span class="fc" id="L45">        this.save(handler, blocks);</span>
+<span class="fc" id="L46">    }</span>
+
+    public void draw(PApplet app) {
+<span class="fc" id="L49">        app.image(this.images.background, this.x, this.y);</span>
+<span class="fc" id="L50">        app.image(this.images.sprite, this.x, this.y);</span>
+<span class="fc" id="L51">    }</span>
+
+    /**
+     * create ImageBuilder
+     * @param app current instance of app
+     * @param background background image
+     * @return ImagesBuilder object
+     */
+    public static ImagesBuilder createImageObject(PApplet app, PImage background) {
+<span class="fc" id="L60">        PImage load = app.loadImage(&quot;src/main/resources/save.png&quot;);</span>
+<span class="fc" id="L61">        ImagesBuilder images = new ImagesBuilder()</span>
+<span class="fc" id="L62">                                .setBackground(background)</span>
+<span class="fc" id="L63">                                .setSprite(load);</span>
+<span class="fc" id="L64">        return images;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

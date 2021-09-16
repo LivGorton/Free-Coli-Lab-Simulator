@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MidiWriter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Assignment3</a> &gt; <a href="index.source.html" class="el_package">piano</a> &gt; <span class="el_source">MidiWriter.java</span></div><h1>MidiWriter.java</h1><pre class="source lang-java linenums">package piano;
+
+import java.io.File;
+
+import javax.sound.midi.*;
+import java.util.Random;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class MidiWriter extends Button {
+
+    /**
+     * Constructor for MidiWriter
+     * @param images ImagesBuilder object
+     */
+    public MidiWriter(ImagesBuilder images) {
+<span class="fc" id="L18">        super(images, 230, 5);</span>
+<span class="fc" id="L19">    }</span>
+
+    /**
+     * Writes the given sequence to a .mid file
+     * @param sequence the sequence to write to the .mid file
+     */
+    public static void writeMidi(Sequence sequence) {
+<span class="fc" id="L26">        String fileName = MidiWriter.generateRandomFileName() + &quot;.mid&quot;;</span>
+        try {
+<span class="fc" id="L28">            File file = new File(fileName);</span>
+<span class="fc" id="L29">            MidiSystem.write(sequence, 0, file);</span>
+<span class="nc" id="L30">        } catch (Exception e) {</span>
+<span class="nc" id="L31">            System.err.println(&quot;file not found&quot;);</span>
+<span class="fc" id="L32">        }</span>
+<span class="fc" id="L33">    }</span>
+
+	public void onClick(MidiHandler handler, Blocks block) {
+<span class="nc" id="L36">        MidiWriter.writeMidi(handler.getSequence());</span>
+<span class="nc" id="L37">    }</span>
+
+    public void draw(PApplet app) {
+<span class="fc" id="L40">        app.image(this.images.background, this.x, this.y);</span>
+<span class="fc" id="L41">        app.image(this.images.sprite, this.x, this.y);</span>
+<span class="fc" id="L42">    }</span>
+
+    /**
+     * creates ImagesBuilder object
+     * @param app current instance of App
+     * @param background background image
+     * @return ImagesBuilder object
+     */
+    public static ImagesBuilder createImageObject(PApplet app, PImage background) {
+<span class="fc" id="L51">        PImage sprite = app.loadImage(&quot;src/main/resources/export.png&quot;);</span>
+<span class="fc" id="L52">        ImagesBuilder images = new ImagesBuilder().setBackground(background).setSprite(sprite);</span>
+<span class="fc" id="L53">        return images;</span>
+    }
+
+    /**
+     * Generates a random 10 character string for the .mid file name.
+     * Allows for a lower chance of filename collision so that the files 
+     * generally persist between sessions.
+     * @return the generated random string
+     */
+    public static String generateRandomFileName() {
+<span class="fc" id="L63">        final String characters = &quot;abcdefghijklmnopqrstuvwxyz&quot;;</span>
+<span class="fc" id="L64">        Random random = new Random();</span>
+<span class="fc" id="L65">        int min = 0;</span>
+<span class="fc" id="L66">        int max = 25;</span>
+<span class="fc" id="L67">        String randomString = &quot;&quot;;</span>
+
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        for (int i = 0; i &lt; 10; i++) {</span>
+<span class="fc" id="L70">            randomString += characters.charAt(random.nextInt(max-min+1)+min);</span>
+        }
+
+<span class="fc" id="L73">        return randomString;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

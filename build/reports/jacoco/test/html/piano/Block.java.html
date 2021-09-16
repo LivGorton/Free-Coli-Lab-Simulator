@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Block.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Assignment3</a> &gt; <a href="index.source.html" class="el_package">piano</a> &gt; <span class="el_source">Block.java</span></div><h1>Block.java</h1><pre class="source lang-java linenums">package piano;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class Block {
+
+    private boolean active;
+    private PImage blockSprite;
+    private int x;
+    private int y;
+    private int indexX;
+    private int indexY;
+
+    /**
+     * The constructor for the Block object
+     * @param app the current instance of App
+     * @param x the x coordinate of the Block image display
+     * @param y the y coordinate of the Block image display
+     * @param indexX the x index for the Block's position 
+     * in the Blocks notesPresent 2D array
+     * @param indexY the y index for the Block's position 
+     * in the Blocks notesPresent 2D array
+     */
+<span class="fc" id="L25">    public Block(PApplet app, int x, int y, int indexX, int indexY) {</span>
+<span class="fc" id="L26">        this.active = false;</span>
+<span class="fc" id="L27">        this.blockSprite = app.loadImage(&quot;src/main/resources/block.png&quot;);;</span>
+<span class="fc" id="L28">        this.x = x;</span>
+<span class="fc" id="L29">        this.y = y;</span>
+<span class="fc" id="L30">        this.indexX = indexX;</span>
+<span class="fc" id="L31">        this.indexY = indexY;</span>
+<span class="fc" id="L32">    }</span>
+
+    /**
+     * Activates and deactivates the block 
+     * when the block has been pressed
+     * @param handler an instance of MidiHandler
+     */
+    public void click(MidiHandler handler) {
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        this.active = !this.active;</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (this.active) {</span>
+<span class="fc" id="L42">            handler.addEvent(this.indexY, this.indexX);</span>
+        } else {
+<span class="fc" id="L44">            handler.removeEvent(this.indexY, this.indexX);</span>
+        }
+<span class="fc" id="L46">    }</span>
+
+    /**
+     * Gets the current state of the block
+     * @return if the block is currently active or not
+     */
+    public boolean isActive() {
+<span class="fc" id="L53">        return this.active;</span>
+    }
+
+    /**
+     * Draws a single block
+     * @param app the current instance of App
+     */
+    public void drawBlock(PApplet app) {
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (this.active) {</span>
+<span class="nc" id="L62">            app.image(this.blockSprite, this.x, this.y);</span>
+        }
+<span class="fc" id="L64">    }</span>
+
+    /**
+     * Deactivates a block regardless of its previous state
+     * @param handler the current instance of MidiHandler
+     */
+    public void deactivate(MidiHandler handler) {
+<span class="fc" id="L71">        this.active = false;</span>
+<span class="fc" id="L72">        handler.removeEvent(this.indexY, this.indexX);</span>
+<span class="fc" id="L73">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClickHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Assignment3</a> &gt; <a href="index.source.html" class="el_package">piano</a> &gt; <span class="el_source">ClickHandler.java</span></div><h1>ClickHandler.java</h1><pre class="source lang-java linenums">package piano;
+
+<span class="nc" id="L3">public class ClickHandler {</span>
+
+    /**
+     * Handles the position of all mouse presses in the App
+     * @param mouseX x coordinate of mouse click
+     * @param mouseY y coordinate of mouse click
+     * @param app instance of App
+     */
+    public static void handleClick(int mouseX, int mouseY, App app) {
+
+<span class="pc bpc" id="L13" title="1 of 4 branches missed.">        if (mouseY &lt;= 45 &amp;&amp; mouseY &gt;= 5) { // handle button clicks</span>
+<span class="pc bpc" id="L14" title="1 of 4 branches missed.">            if (mouseX &lt;= 45 &amp;&amp; mouseX &gt;= 5) {</span>
+<span class="fc" id="L15">                app.playPauseButton.onClick(app.handler, app.blocks);</span>
+<span class="pc bpc" id="L16" title="2 of 4 branches missed.">            } else if (mouseX &gt;= 50 &amp;&amp; mouseX &lt;= 90) {</span>
+<span class="fc" id="L17">                app.cursor.resetCursorPosition();</span>
+<span class="fc" id="L18">                app.playPauseButton.playing = false;</span>
+<span class="fc" id="L19">                app.stopButton.onClick(app.handler, app.blocks);</span>
+<span class="nc bnc" id="L20" title="All 4 branches missed.">            } else if (mouseX &gt;= 95 &amp;&amp; mouseX &lt;= 135) {</span>
+<span class="nc" id="L21">                app.clearButton.onClick(app.handler, app.blocks);</span>
+<span class="nc bnc" id="L22" title="All 4 branches missed.">            } else if (mouseX &gt;= 275 &amp;&amp; mouseX &lt;= 405) {</span>
+<span class="nc" id="L23">                app.instrumentChangeButtons.onClick(mouseX, app.handler);</span>
+<span class="nc bnc" id="L24" title="All 4 branches missed.">            } else if (mouseX &gt;= 140 &amp;&amp; mouseX &lt;= 180) {</span>
+<span class="nc" id="L25">                app.saveButton.onClick(app.handler, app.blocks);</span>
+<span class="nc bnc" id="L26" title="All 4 branches missed.">            } else if (mouseX &gt;= 185 &amp;&amp; mouseX &lt;= 225) {</span>
+<span class="nc" id="L27">                app.openSaveButton.onClick(app.handler, app.blocks);</span>
+<span class="nc" id="L28">                app.cursor.resetCursorPosition();</span>
+<span class="nc" id="L29">                app.playPauseButton.playing = false;</span>
+<span class="nc bnc" id="L30" title="All 4 branches missed.">            } else if (mouseX &gt;= 230 &amp;&amp; mouseX &lt;= 270) {</span>
+<span class="nc" id="L31">                app.midiWriter.onClick(app.handler, app.blocks);</span>
+            }
+        } else { // handle clicking of blocks
+<span class="pc bpc" id="L34" title="3 of 6 branches missed.">            if (mouseX &lt;= 540 &amp;&amp; mouseX &gt;= 60 &amp;&amp; mouseY &gt;= 75) { </span>
+<span class="fc" id="L35">                app.blocks.setBlock((int) (mouseX - 60)/15, (int) (mouseY - 75)/20, app.handler);</span>
+            }
+        }
+<span class="fc" id="L38">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
