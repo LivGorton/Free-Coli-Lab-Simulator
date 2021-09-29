@@ -24,7 +24,9 @@ public class Button {
         app.image(this.img, this.x, this.y, this.width, this.height);
         app.textSize(16);
         app.fill(0, 0, 0);
-        app.text(this.textLabel, this.x + 30 - textLabel.length(), this.y + this.height + 30);
+        if (!(this.textLabel == null)) {
+            app.text(this.textLabel, this.x + 30 - textLabel.length(), this.y + this.height + 30);
+        }
     }
     
 }

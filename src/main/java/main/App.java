@@ -9,13 +9,17 @@ public class App extends PApplet {
     Button freecoliButton;
     Button heatshockButton;
     Button electroButton;
+    Incubator incubatorButton;
     Menu startMenu;
     Lab lab;
     PImage freecoliTube;
     PImage heatshockTube;
     PImage electroTube;
+    PImage incubator;
+    PImage freecoli;
     boolean inLab = false;
     String experimentType;
+    DraggableObject freecoliDraggable;
 
     /**
      * Setup non-image based objects
@@ -49,9 +53,14 @@ public class App extends PApplet {
         freecoliTube = loadImage("src/main/resources/freecoli.png");
         heatshockTube = loadImage("src/main/resources/heatshock.png");
         electroTube = loadImage("src/main/resources/electro.png");
+        incubator = loadImage("src/main/resources/incubator.png");
+        freecoli = loadImage("src/main/resources/freecolitube.png");
+        freecoliDraggable = new DraggableObject(freecoli, 800, 830, 100, 150);
+        incubatorButton = new Incubator(900, 100, 200, 250, incubator, null, freecoliDraggable);
         freecoliButton = new Button(300, 250, 100, 300, freecoliTube, "Free Coli");
         heatshockButton = new Button(550, 250, 100, 300, heatshockTube, "Heat Shock");
         electroButton = new Button(800, 250, 100, 300, electroTube, "Electroporation");
+        
 
         // this.startButton = new Button(500, 365, 200, 70, "Start");
         startMenu = new Menu(freecoliButton, heatshockButton, electroButton);
@@ -80,15 +89,15 @@ public class App extends PApplet {
         if (mouseX >= 300 && mouseX <= 400 && mouseY >= 250 && mouseY <= 550) {
             inLab = true;
             experimentType = "freecoli";
-            this.lab = new Lab(experimentType);
+            this.lab = new Lab(experimentType, incubatorButton);
         } else if (mouseX >= 550 && mouseY <= 650 && mouseY >= 250 && mouseY <= 550) {
             inLab = true;
             experimentType = "electrocoli";
-            this.lab = new Lab(experimentType);
+            this.lab = new Lab(experimentType, incubatorButton);
         } else if (mouseX >= 800 && mouseY <= 900 && mouseY >= 250 && mouseY <= 550) {
             inLab = true;
             experimentType = "heatcoli";
-            this.lab = new Lab(experimentType);
+            this.lab = new Lab(experimentType, incubatorButton);
         }
 
         

@@ -8,13 +8,15 @@ public class Lab {
     int hoursPassed;
     String experimentType;
     Experiment experiment;
+    Button incubator;
 
-    public Lab(String experimentType) {
+    public Lab(String experimentType, Button incubator) {
 
         this.timeMultiplier = 1;
         this.hoursPassed = 0;
         this.experimentType = experimentType;
         this.initExperiment();
+        this.incubator = incubator;
 
     }
 
@@ -30,6 +32,7 @@ public class Lab {
 
     public void draw(PApplet app) {
         app.background(255, 255, 255);
+        this.incubator.draw(app);
         app.textSize(18);
         app.fill(230, 230, 230);
         app.rect(15, 15, 40, 40);
@@ -45,6 +48,11 @@ public class Lab {
         if (app.frameCount % 300 == 0) {
             this.hoursPassed += 1;
         }
+
+        if (this.experimentType == "freecoli") {
+            // this.experiment.draw();
+        }
+
     }
 
     public void multiplierx1Click() {
