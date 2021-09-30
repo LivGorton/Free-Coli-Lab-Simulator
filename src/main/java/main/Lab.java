@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import processing.core.PApplet;
 
 public class Lab {
@@ -8,15 +9,17 @@ public class Lab {
     int hoursPassed;
     String experimentType;
     Experiment experiment;
-    Button incubator;
+    Incubator incubator;
+    
 
-    public Lab(String experimentType, Button incubator) {
+    public Lab(String experimentType, Incubator incubator) {
 
         this.timeMultiplier = 1;
         this.hoursPassed = 0;
         this.experimentType = experimentType;
         this.initExperiment();
         this.incubator = incubator;
+        
 
     }
 
@@ -26,9 +29,11 @@ public class Lab {
         } else if (this.experimentType == "electrocoli") {
 
         } else if (this.experimentType == "heatcoli") {
-
+            
         } 
     }
+
+
 
     public void draw(PApplet app) {
         app.background(255, 255, 255);
@@ -43,14 +48,14 @@ public class Lab {
         app.text("2x", 85, 40);
         app.text("5x", 145, 40);
         app.textSize(20);
-        app.text(Integer.toString(hoursPassed) + " Hours Passed", 205, 45);
+        app.text(Integer.toString(this.hoursPassed) + " Hours Passed", 205, 45);
 
         if (app.frameCount % 300 == 0) {
             this.hoursPassed += 1;
         }
 
         if (this.experimentType == "freecoli") {
-            // this.experiment.draw();
+            this.experiment.draw(app);
         }
 
     }

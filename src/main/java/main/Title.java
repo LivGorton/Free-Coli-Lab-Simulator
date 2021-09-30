@@ -1,6 +1,7 @@
 package main;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PImage;
 
@@ -24,11 +25,11 @@ public class Title {
         app.textFont(this.font,70);
         app.image(this.logo, 40,100, this.logo.width*2, this.logo.height*2);                  
         app.fill(0);  
-        app.textAlign(app.CENTER);
+        app.textAlign(PConstants.CENTER);
         app.text("FreeColi",app.width/2 + 300,app.height/2 -200); 
         app.textFont(this.font,25);
         app.text("A natural transformation lab simulator", app.width/2 + 300, app.height/2 - 150);
-        app.textAlign(app.LEFT);
+        app.textAlign(PConstants.LEFT);
         this.startButton.draw(app);
         
 }
