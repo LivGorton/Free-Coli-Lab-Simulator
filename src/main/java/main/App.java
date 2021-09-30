@@ -139,18 +139,13 @@ public class App extends PApplet {
                     float deltaX = mouseX - pmouseX;
                     float deltaY = mouseY - pmouseY;
                     this.lab.experiment.itemsToDraw.get(i).startX += Math.round(deltaX);
-                    this.lab.experiment.itemsToDraw.get(i).endX += Math.round(deltaX);
                     this.lab.experiment.itemsToDraw.get(i).startY += Math.round(deltaY);
-                    this.lab.experiment.itemsToDraw.get(i).startY += Math.round(deltaY);
-                    print(this.lab.experiment.itemsToDraw.get(i).startX);
-                    print(this.lab.experiment.itemsToDraw.get(i).startY);
                 }
             }
         }
     }
 
     public void mouseReleased() {
-        print("wot");
         if (inLab) {
             for (int i = 0; i < this.lab.experiment.itemsToDraw.size(); i++) {
                 this.lab.experiment.itemsToDraw.get(i).beingDragged = false;
