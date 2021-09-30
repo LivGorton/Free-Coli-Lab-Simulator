@@ -2,6 +2,7 @@ package main;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.core.PFont;
 import main.Button;
 
 public class App extends PApplet {
@@ -9,6 +10,8 @@ public class App extends PApplet {
     Button freecoliButton;
     Button heatshockButton;
     Button electroButton;
+    Button startButton;
+    Title startTitle;
     Incubator incubatorButton;
     Menu startMenu;
     Lab lab;
@@ -17,6 +20,9 @@ public class App extends PApplet {
     PImage electroTube;
     PImage incubator;
     PImage freecoli;
+    PImage start;
+    PImage logo;
+    PFont font;
     boolean inLab = false;
     String experimentType;
     DraggableObject freecoliDraggable;
@@ -55,17 +61,21 @@ public class App extends PApplet {
         electroTube = loadImage("src/main/resources/electro.png");
         incubator = loadImage("src/main/resources/incubator.png");
         freecoli = loadImage("src/main/resources/freecolitube.png");
+        logo = loadImage("src/main/resources/logo.png");
+        start = loadImage("src/main/resources/startbutton.png");
+
         freecoliDraggable = new DraggableObject(freecoli, 800, 830, 100, 150);
         incubatorButton = new Incubator(900, 100, 200, 250, incubator, null, freecoliDraggable);
         freecoliButton = new Button(300, 250, 100, 300, freecoliTube, "Free Coli");
         heatshockButton = new Button(550, 250, 100, 300, heatshockTube, "Heat Shock");
         electroButton = new Button(800, 250, 100, 300, electroTube, "Electroporation");
-        
+        startButton = new Button(this.width/2 + 280,this.height/2 -100, 60,60, start, " ");
+        font = createFont("Comfortaa", 20);
 
         // this.startButton = new Button(500, 365, 200, 70, "Start");
-        startMenu = new Menu(freecoliButton, heatshockButton, electroButton);
+        startTitle = new Title(startButton, logo, font);
+        startTitle.draw(this);
 
-        startMenu.draw(this);
 
     }
 
@@ -85,8 +95,10 @@ public class App extends PApplet {
      * which buttons have been pressed
      */
     public void mousePressed() { 
-
-        if (mouseX >= 300 && mouseX <= 400 && mouseY >= 250 && mouseY <= 550) {
+        if (mouseX >= this.width/2 + 240 && mouseX <= this.width/2 + 320 && mouseY <= this.height/2 -60 && mouseY >= this.height/2 -140){
+            startMenu = new Menu(freecoliButton, heatshockButton, electroButton, font);
+            startMenu.draw(this);
+        } else if (mouseX >= 300 && mouseX <= 400 && mouseY >= 250 && mouseY <= 550) {
             inLab = true;
             experimentType = "freecoli";
             this.lab = new Lab(experimentType, incubatorButton);
